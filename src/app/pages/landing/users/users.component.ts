@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UsersService} from '../../../services/users.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'gw-users',
@@ -9,12 +10,18 @@ import {UsersService} from '../../../services/users.service';
 export class UsersComponent implements OnInit {
   public bgColor = 'yellow';
   public selectedUser = null;
-  constructor(public usersService: UsersService) { }
+  constructor(public usersService: UsersService, public route: ActivatedRoute) { }
 
   ngOnInit() {
     this.usersService.selectedUser.subscribe( user => {
       this.selectedUser = user;
       this.randomBackground();
+    });
+    this.route.paramMap.subscribe( route => {
+      console.log('route', route.get('id'));
+      if (route.get('id')) {
+        this.usersService.onSelectUserByUsername(route.get('id'));
+      }
     });
   }
 

@@ -5,6 +5,7 @@ import { LoggedOutComponent } from './logged-out/logged-out.component';
 
 const routes: Routes = [
   {path: '', component: LoggedOutComponent},
+  {path: 'dashboard/:id', component: LoggedInComponent},
   {path: 'dashboard', component: LoggedInComponent}
 ];
 
